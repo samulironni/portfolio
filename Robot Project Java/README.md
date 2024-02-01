@@ -1,7 +1,7 @@
 Introduction
 This project is about coding the LeJOS EV3 robot to follow a line and avoid obstacles. 
 
-Project team: Mikael Rokkanen, Samppa Saarinen, Samuli Ronni and Rony Mölkänen
+Project team: Samuli Ronni, Samppa Saarinen, Mikael Rokkanen and Rony Mölkänen
 
 The main objects of this projects are:
 
@@ -15,3 +15,7 @@ The main objects of this projects are:
 -Get the robot moving by following the line
 
 -Make the robot avoid upcoming obstacles
+
+-Get real-time speed data from robot
+
+-Set new speeds to robot in real-time
