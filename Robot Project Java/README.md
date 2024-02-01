@@ -1,7 +1,7 @@
 Introduction
 This project is about coding the LeJOS EV3 robot to follow a line and avoid obstacles. 
 
-Project team: Mikael Rokkanen, Samppa Saarinen, Samuli Ronni and Rony Mölkänen
+Project team: Samuli Ronni, Samppa Saarinen, Mikael Rokkanen and Rony Mölkänen
 
 The main objects of this projects are:
 
