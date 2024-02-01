@@ -1,7 +1,7 @@
 
 import lejos.hardware.Button;
 
-public class Main2 {
+public class Main {
 
 	private static DataExchange DE;
 	private static ColorSensor CS;
