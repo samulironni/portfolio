@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<link href="assets/style.css" rel="stylesheet" type="text/css">
+<title>Robotin kontrollipaneeli</title>
+</head>
+
+<script>
+// Function to send robot data to server using XMLHttpRequest
+function sendRobot(form){
+	// Create new object to store robot values from form input
+	var robot = new Object();
+	// Set speedmulti value to the robot object from form input
+	robot.speedmulti = form.speedmulti.value;
+	// Set acceleration value to the robot object from form input
+	robot.acceleration = form.acceleration.value;
+	// Set black_value value to the robot object from form input
+	robot.black_value = form.black_value.value;
+	// Set white_value value to the robot object from form input
+	robot.white_value = form.white_value.value;
+	// Convert robot object to JSON string
+	var jsonRobot = JSON.stringify(robot);
+	
+	// Create new XMLHttpRequest object
+	var xmlhttp = new XMLHttpRequest();
+	xmlhttp.onreadystatechange = function() {
+		// Check if request was successful
+		if (this.readyState == 4 && this.status == 200) {
+			// Display server response in result element
+			document.getElementById("result").innerHTML = this.responseText;
+		}
+	};
+	// Open connection to server with POST method
+	xmlhttp.open("POST", "/rest/testing/newrobotvalues", true);
+	// Set request header with content type
+	xmlhttp.setRequestHeader("Content-type", "application/json");
+	// Send JSON data to server
+	xmlhttp.send(jsonRobot);
+}
+</script>
+
+<script>
+// Function to get current robot stats from server using XMLHttpRequest
+function readCurrentStats(){
+	// Create new XMLHttpRequest object
+	var xmlhttp=new XMLHttpRequest();
+	xmlhttp.onreadystatechange = function() {
+		// Check if request was successful
+		if (this.readyState == 4 && this.status == 200) {
+			// Get JSON string from server response
+			var jsonstats=this.responseText;
+			// Add JSON string as a content of element stats
+			document.getElementById("stats").innerHTML = jsonstats;
+			// Parse JSON string to a Javascript object
+			var stats=JSON.parse(jsonstats);
+			// Call function to print current robot stats
+			printCurrentStats(stats);
+		}
+	};
+	// Open connection to server with GET method
+	xmlhttp.open("GET", "/rest/testing/getlatestvalues", true);
+	// Send request to server
+	xmlhttp.send();	
+}
+
+// Function to print current robot stats
+function printCurrentStats(robot){
+	var s = "<table id='table1'>";
+	s += "<tr><th>Nopeus</th><th>Kiihdytys</th><th>Musta-arvo</th><th>Valkoinen-arvo</th></tr>";
+	s += "<tr>";
+	s += "<td>" + robot.speedmulti + "</td>";
+	s += "<td>" + robot.acceleration + "</td>";
+	s += "<td>" + robot.black_value + "</td>";
+	s += "<td>" + robot.white_value + "</td>";
+	s += "</tr>";
+	s += "</table>";
+	document.getElementById("stats").innerHTML=s;
+}
+</script>
+
+<script>
+// Function to get current robot speed data from server using XMLHttpRequest
+function readDbSpeed(){
+	// Create new XMLHttpRequest object
+	var xmlhttp=new XMLHttpRequest();
+	xmlhttp.onreadystatechange = function() {
+		// Check if request was successful
+		if (this.readyState == 4 && this.status == 200) {
+			// Get JSON string from server response
+			var jsondb=this.responseText;
+		  //Add JSON string as a content of element resultone
+		  document.getElementById("dbspeed").innerHTML = jsondb;
+		  //Parse json string to a Javascript object
+		  var dbspeed=JSON.parse(jsondb);
+		  //print stats 
+		  printCurrentStats(dbspeed);
+	  }
+	};
+	xmlhttp.open("GET", "/rest/testing/getdbspeed", true);
+	xmlhttp.send();	
+}
+function printDbSpeed(speeddata){
+	var t = <table id="table2">;
+	t += "<tr><th>Vasemman moottorin nopeus</th><th>Oikean moottorin nopeus</th></tr>";
+	t += "<tr>";
+	t += "<td>" + speeddata.lcurrent_speed + "</td>";
+	t += "<td>" + speeddata.rcurrent_speed + "</td>";
+	t += "</tr>";
+	t += "</table>";
+	document.getElementById("dbspeed").innerHTML=t;
+}
+</script>
+
+<body>
+	<header id="heder">
+		<div id=lego>
+			<img id='logo'
+				src='/assets/LEGO-Logo.png' alt= 'lego'
+				width='150' height='70' style='float: left;'>
+		</div>
+		<h1>EV3 Lego Project -Team Databurst</h1>
+
+	</header>
+	<article id='artikkeli'>
+		<section>
+			<h2>Robotin kontrollipaneeli</h2>
+			<form>
+				<label for="Nopeus"><b>Nopeus:</b></label> <input id="nopeus"
+					type='number' name='speedmulti' min="0" max="2000" required><br>
+				<br> <label for="Kiihdytys"><b>Kiihdytys:</b></label> <input
+					type='number' name='acceleration' min="0" max="2000" required><br>
+				<br> <label for="black_value"><b>Musta-arvo:</b></label> <input
+					type="range" id="black_value" name="black_value" step="0.01"
+					min="0" max="0.3"><output id="black_output"></output><br>
+				<br> <label for="white_value"><b>Valkoinen-arvo:</b></label> <input
+					type="range" id="white_value" name="white_value" step="0.01"
+					min="0.3" max="1"><output id="white_output"></output><br>
+					<br> <input type="button" name="ok" value="Lähetä uudet arvot robotille" onclick="sendRobot(this.form);">
+			</form>
+
+			<br><br>
+			<button onclick='readCurrentStats();'>Näytä tämänhetkiset arvot</button>
+			<br><br><br>
+			<div id='stats'></div>
+			
+	<script>
+	// Get the white value and output element
+	const whiteValue = document.getElementById('white_value');
+	const whiteOutput = document.getElementById('white_output');
+
+	// Set the initial output text content to the value of whiteValue
+	whiteOutput.textContent = whiteValue.value;
+
+	// Add an event listener to whiteValue that updates the output text content whenever the value changes
+	whiteValue.addEventListener('input', () => {
+	  whiteOutput.textContent = whiteValue.value;
+	});
+
+	// Get the black value and output element
+	const blackValue = document.getElementById('black_value');
+	const blackOutput = document.getElementById('black_output');
+
+	// Set the initial output text content to the value of blackValue
+	blackOutput.textContent = blackValue.value;
+
+	// Add an event listener to blackValue that updates the output text content whenever the value changes
+	blackValue.addEventListener('input', () => {
+	  blackOutput.textContent = blackValue.value;
+	});
+	</script>
+		</section>
+	</article>
+
+	<aside>
+			<br>
+			<button onclick='readDbSpeed();'>Näytä moottorien tämänhetkiset nopeudet</button>
+			<br><br>
+			<div id='dbspeed'></div>
+	</aside>
+</body>
+</html>
