@@ -15,3 +15,7 @@ The main objects of this projects are:
 -Get the robot moving by following the line
 
 -Make the robot avoid upcoming obstacles
+
+-Get real-time speed data from robot
+
+-Set new speeds to robot in real-time
