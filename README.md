@@ -1,7 +1,7 @@
 My portfolio which contains:
 
 AI projects:
-- AI development for 2048 game (best results are in Depth4.xlsx)
+- AI development for 2048 game
 - A* algorithm labyrinth project with demo video
 
 Analytics:
