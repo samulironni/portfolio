@@ -1,0 +1,5 @@
+test\CpuMonitor.class
+com\example\Main.class
+test\NetworkMonitor.class
+test\NvidiaGpuMonitor.class
+test\MemoryMonitor.class
