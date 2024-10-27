@@ -12,7 +12,7 @@
 --- 
  ### Tree Recognition using pre-trained ResNet18 model with Gradio Interface
   - #### 5 different trees:
-  - ##### Maple, Juniper, Birch, Pine, Spruce
+  - ##### Maple, Juniper, Birch, Pine, Spruce (25/30 predicted right)
   - ##### Gradio Interface
   - ##### Relatively small dataset which affected the results
  ---
