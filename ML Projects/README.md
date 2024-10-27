@@ -7,10 +7,12 @@
  ### Text Summarization model 
   - ##### BART model modified with different parameters and adding translation option from English to Finnish
   - ##### Max length 1000 tokens ~ 6000 characters
+  - ##### Gradio Interface
   - ##### <a href="https://drive.google.com/file/d/1MNDije5jdEuoFOrSM6rw8yqkjjL_oBrO/view?usp=sharing"> Link to demo video
 --- 
  ### Tree Recognition using pre-trained ResNet18 model with Gradio Interface
   - #### 5 different trees:
   - ##### Maple, Juniper, Birch, Pine, Spruce
+  - ##### Gradio Interface
   - ##### Relatively small dataset which affected the results
  ---
