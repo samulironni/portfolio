@@ -1,4 +1,4 @@
-## 2048 AI Development with Python
+## 2048 AI Development with Python (Tkinter Interface)
 
 ##### AI_heuristics.py contains 6 different heuristics with different weights to play the game as good as possible
 ##### Logic.py contains the basic game logic
